@@ -12,8 +12,8 @@ public class IPFinder implements Runnable {
     private int low;
     private int high;
     private ArrayList<String> reachables= new ArrayList<>();
-    String ipString ="192.168.1.45";
-    private int ipAdress = 755083456;
+    String ipString ="192.168";
+    private int ipAdress = 999999;
     private String prefix ="192.168.1";
 
 
