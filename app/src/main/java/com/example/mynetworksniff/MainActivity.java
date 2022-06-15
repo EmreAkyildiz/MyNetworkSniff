@@ -41,25 +41,14 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         textView=findViewById(R.id.textView);
 
-
-
-
         try {
             init();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
-
-        startAsyncTask();
-
     }
 
-
-    public void startAsyncTask(){
-        NetworkSniffTask task = new NetworkSniffTask(getApplicationContext());
-        task.execute();
-    }
     void init() throws InterruptedException{
         int sizeOfOne = ARRAY_SIZE/FINDERS;
 
@@ -82,56 +71,6 @@ public class MainActivity extends AppCompatActivity {
 
 }
 
-    private static class NetworkSniffTask extends AsyncTask<Void, Void, Void> {
 
-        private static final String TAG = "nstask";
-
-        private WeakReference<Context> mContextRef;
-
-        public NetworkSniffTask(Context context) {
-            mContextRef = new WeakReference<Context>(context);
-        }
-
-        @Override
-        protected Void doInBackground(Void... voids) {
-            try {
-                sniff();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            return null;
-        }
-
-        public void sniff()throws InterruptedException{
-            Log.d(TAG, "Let's sniff the network");
-
-            try {
-                Context context = mContextRef.get();
-
-                if (context != null) {
-
-                    ConnectivityManager cm = (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
-                    NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
-                    WifiManager wm = (WifiManager)context.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
-
-                    WifiInfo connectionInfo = wm.getConnectionInfo();
-                    int ipAddress = connectionInfo.getIpAddress();
-                    String ipString = Formatter.formatIpAddress(ipAddress);
-
-
-                    Log.d(TAG, "activeNetwork: " + String.valueOf(activeNetwork));
-                    Log.d(TAG, "ipString: " + String.valueOf(ipString));
-
-                    String prefix = ipString.substring(0, ipString.lastIndexOf(".") + 1);
-                    Log.d(TAG, "prefix: " + prefix);
-
-
-                }
-            } catch (Throwable t) {
-                Log.e(TAG, "Well that's not good.", t);
-            }
-
-        }
-    }
 
 }

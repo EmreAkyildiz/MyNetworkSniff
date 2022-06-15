@@ -13,8 +13,7 @@ public class IPFinder implements Runnable {
     private int high;
     private ArrayList<String> reachables= new ArrayList<>();
     String ipString ="192.168.1.45";
-    private int ipAdress = 755083456;
-    private String prefix ="192.168.1";
+
 
 
     public IPFinder(String[] ips, int low, int high) {
@@ -42,7 +41,7 @@ public class IPFinder implements Runnable {
             }
             try {
                 Log.d("TAG","TESTİNG:"+testIp);
-                reachable = address.isReachable(1500);
+                reachable = address.isReachable(1000);
             } catch (IOException e) {
                 e.printStackTrace();
             }
